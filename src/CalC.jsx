@@ -56,7 +56,7 @@ function CalC() {
   };
   return (
     <div>
-      <Input type="number" className="border-2" />
+      {/* <Input type="number" className="border-2" /> */}
       {/* <button onClick={() => dispatch({ type: "addition" })}>Add</button> */}
       <select onChange={(e) => dispatch({ type: e.target.value })}>
         <option value={""}>choose</option>
