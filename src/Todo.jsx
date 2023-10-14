@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { color } from "./features/color";
 const Todo = () => {
+  const colors = useSelector((state) => state.color.value);
+  const dispatch = useDispatch();
+  console.log(colors.bgcolor, "color");
   const [value, setValue] = useState("");
   const [array, setArray] = useState([]);
   useEffect(() => {
@@ -43,8 +47,11 @@ const Todo = () => {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: colors.bgcolor }}>
       <h1>Your PWA App</h1>
+      <button onClick={() => dispatch(color({ bgcolor: "black" }))}>
+        change
+      </button>
       <form>
         <input
           type="text"

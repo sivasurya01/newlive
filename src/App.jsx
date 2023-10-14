@@ -12,36 +12,32 @@ import Input from "./Input";
 import Background from "./Background";
 import UseReducer from "./UseReducer";
 import Try from "./Try";
-import { useSelector } from "react-redux";
-import { color } from "./features/color";
 import Counter from "./Couter";
 import Parent from "./Parent";
 import Child from "./Child";
 const App = () => {
-  const color = useSelector((state) => state.color.value);
-  console.log(color, "color");
+  // const color = useSelector((state) => state.color.value);
+  // console.log(color, "color");
   return (
-    <div className="" style={{ backgroundColor: `${color.bgcolor}` }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<CalC />} />
-          <Route path="/Todo" element={<Todo />} />
-          <Route path="/Parent" element={<Parent />} />
-          <Route path="/Child" element={<Child />} />
-          <Route path="/Counter" element={<Counter />} />
-          <Route path="/Try" element={<Try />} />
-          <Route path="/Multiple" element={<Multiple />} />
-          <Route path="/Background" element={<Background />} />
-          <Route path="/Input" element={<Input />} />
-          <Route path="/StopWAtch" element={<StopWAtch />} />
-          <Route path="/Memo" element={<Memo />} />
-          <Route path="/ToDo2" element={<ToDo2 />} />
-          <Route path="/UseReducer" element={<UseReducer />} />
-          <Route path="/Reduser" element={<Reduser />} />
-          <Route path="/Context" element={<Context />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CalC />} />
+        <Route path="/Todo" element={<Todo />} />
+        <Route path="/Parent" element={<Parent />} />
+        <Route path="/Child" element={<Child />} />
+        <Route path="/Counter" element={<Counter />} />
+        <Route path="/Try" element={<Try />} />
+        <Route path="/Multiple" element={<Multiple />} />
+        <Route path="/Background" element={<Background />} />
+        <Route path="/Input" element={<Input />} />
+        <Route path="/StopWAtch" element={<StopWAtch />} />
+        <Route path="/Memo" element={<Memo />} />
+        <Route path="/ToDo2" element={<ToDo2 />} />
+        <Route path="/UseReducer" element={<UseReducer />} />
+        <Route path="/Reduser" element={<Reduser />} />
+        <Route path="/Context" element={<Context />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

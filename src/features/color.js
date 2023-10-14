@@ -1,5 +1,5 @@
 import {createSlice } from "@reduxjs/toolkit";
-const intialstatevalue = {bgcolor:''}
+const intialstatevalue = {bgcolor:'green'}
 export const colorSlice = createSlice({
     name:'color',
     initialState: {value: intialstatevalue},
@@ -9,5 +9,5 @@ export const colorSlice = createSlice({
         }
     }
 })
-export default colorSlice.reducer
 export const {color} = colorSlice.actions
+export default colorSlice.reducer

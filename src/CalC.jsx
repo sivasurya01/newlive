@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { Input } from "sivasuryainput/src/componts/Input";
+import { useSelector } from "react-redux";
 const initialState = {
   input1: "",
   input2: "",
@@ -47,6 +48,8 @@ const reducer = (state, action) => {
   }
 };
 function CalC() {
+  const color = useSelector((state) => state.color.value); // Provide the selector
+  console.log(color.bgcolor, "color");
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state, "state");
   const handleChange = (e) => {
@@ -55,22 +58,27 @@ function CalC() {
     dispatch({ type: name, value });
   };
   return (
-    <div>
-      {/* <Input type="number" className="border-2" /> */}
-      {/* <button onClick={() => dispatch({ type: "addition" })}>Add</button> */}
-      <select onChange={(e) => dispatch({ type: e.target.value })}>
-        <option value={""}>choose</option>
-        <option value={"addition"}>add</option>
-        <option value={"subract"}>sub</option>
-        <option value={"multiply"}>mul</option>
-        <option value={"division"}>div</option>
-      </select>
-      input1:
-      <input name="updateInput1" onChange={handleChange} />
-      input2:
-      <input name="updateInput2" onChange={handleChange} />
-      <input value={state.count} readOnly />
-    </div>
+    <>
+      <div style={{ backgroundColor: color.bgcolor }}>
+        {/* <Input type="number" className="border-2" /> */}
+        {/* <button onClick={() => dispatch({ type: "addition" })}>Add</button> */}
+        <select
+          onChange={(e) => dispatch({ type: e.target.value })}
+          style={{ backgroundColor: color.bgcolor }}
+        >
+          <option value={""}>choose</option>
+          <option value={"addition"}>add</option>
+          <option value={"subract"}>sub</option>
+          <option value={"multiply"}>mul</option>
+          <option value={"division"}>div</option>
+        </select>
+        input1:
+        <input name="updateInput1" onChange={handleChange} />
+        input2:
+        <input name="updateInput2" onChange={handleChange} />
+        <input value={state.count} readOnly />
+      </div>
+    </>
   );
 }
 
