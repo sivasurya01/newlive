@@ -1,5 +1,5 @@
 import {createSlice } from "@reduxjs/toolkit";
-const intialstatevalue = {bgcolor:'green'}
+const intialstatevalue = {bgcolor:''}
 export const colorSlice = createSlice({
     name:'color',
     initialState: {value: intialstatevalue},
