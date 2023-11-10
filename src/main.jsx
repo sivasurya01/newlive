@@ -5,9 +5,13 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import colorSlice from "./features/color.js";
+import Userslice from "./UserSlice.js";
+import Outlets from "./features/Outlet.js";
 const store = configureStore({
   reducer: {
     color: colorSlice,
+    users: Userslice,
+    outlets: Outlets,
   },
 });
 ReactDOM.createRoot(document.getElementById("root")).render(

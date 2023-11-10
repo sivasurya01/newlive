@@ -15,6 +15,9 @@ import Try from "./Try";
 import Counter from "./Couter";
 import Parent from "./Parent";
 import Child from "./Child";
+import Users from "./Users";
+import Updateuser from "./Updateuser";
+import Staecitycountry from "./Staecitycountry";
 const App = () => {
   // const color = useSelector((state) => state.color.value);
   // console.log(color, "color");
@@ -24,7 +27,10 @@ const App = () => {
         <Route path="/" element={<CalC />} />
         <Route path="/Todo" element={<Todo />} />
         <Route path="/Parent" element={<Parent />} />
+        <Route path="/Updateuser/:id" element={<Updateuser />} />
+        <Route path="/Users" element={<Users />} />
         <Route path="/Child" element={<Child />} />
+        <Route path="/Staecitycountry" element={<Staecitycountry />} />
         <Route path="/Counter" element={<Counter />} />
         <Route path="/Try" element={<Try />} />
         <Route path="/Multiple" element={<Multiple />} />
