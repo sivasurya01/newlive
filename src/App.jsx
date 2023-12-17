@@ -18,6 +18,8 @@ import Child from "./Child";
 import Users from "./Users";
 import Updateuser from "./Updateuser";
 import Staecitycountry from "./Staecitycountry";
+import ReactReduscer from "./ReactReduscer";
+import Counterapp from "./Counterapp";
 const App = () => {
   // const color = useSelector((state) => state.color.value);
   // console.log(color, "color");
@@ -25,8 +27,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CalC />} />
+        <Route path="/Counterapp" element={<Counterapp />} />
         <Route path="/Todo" element={<Todo />} />
         <Route path="/Parent" element={<Parent />} />
+        <Route path="/ReactReduscer" element={<ReactReduscer />} />
         <Route path="/Updateuser/:id" element={<Updateuser />} />
         <Route path="/Users" element={<Users />} />
         <Route path="/Child" element={<Child />} />

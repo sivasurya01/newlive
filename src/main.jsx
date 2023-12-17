@@ -7,11 +7,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import colorSlice from "./features/color.js";
 import Userslice from "./UserSlice.js";
 import Outlets from "./features/Outlet.js";
+import Counter from "./features/Couter.js";
 const store = configureStore({
   reducer: {
     color: colorSlice,
     users: Userslice,
     outlets: Outlets,
+    Counter: Counter,
   },
 });
 ReactDOM.createRoot(document.getElementById("root")).render(
