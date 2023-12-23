@@ -1,6 +1,8 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Input } from "sivasuryainput/src/componts/Input";
 import { useSelector } from "react-redux";
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import { getusers, postusers, deleteuser } from "./usersapi";
 const initialState = {
   input1: "",
   input2: "",
@@ -48,6 +50,17 @@ const reducer = (state, action) => {
   }
 };
 function CalC() {
+  const {
+    isLoading,
+    isError,
+    error,
+    data: users,
+  } = useQuery("users", getusers, {
+    select: (data) => data.sort((a, b) => b.id - a.id),
+  });
+  const [user, setUser] = useState([]);
+  const [value, setValue] = useState("");
+
   const color = useSelector((state) => state.color.value); // Provide the selector
   console.log(color.bgcolor, "color");
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -56,6 +69,31 @@ function CalC() {
     const { name, value } = e.target;
     console.log({ type: name, value });
     dispatch({ type: name, value });
+  };
+  const content = JSON.stringify(users);
+  let queryClient = useQueryClient();
+  const addquery = useMutation(postusers, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("users");
+    },
+  });
+  const deletemudation = useMutation(deleteuser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("users");
+    },
+  });
+  useEffect(() => {
+    setUser(users);
+  }, [users]);
+  const handlesumit = (e) => {
+    e.preventDefault();
+    addquery.mutate({
+      userId: 1,
+      id: Math.random() * 10,
+      title: value,
+      completed: false,
+    });
+    setValue("");
   };
   return (
     <>
@@ -78,6 +116,27 @@ function CalC() {
         <input name="updateInput2" onChange={handleChange} />
         <input value={state.count} readOnly />
       </div>
+      <form onSubmit={(e) => handlesumit(e)}>
+        <input
+          type="text"
+          required
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <button>adding</button>
+      </form>
+      {addquery.isLoading
+        ? "loading"
+        : user?.map((data) => {
+            return (
+              <p>
+                {data.title}
+                <button onClick={() => deletemudation.mutate({ id: data.id })}>
+                  delete
+                </button>
+              </p>
+            );
+          })}
     </>
   );
 }
