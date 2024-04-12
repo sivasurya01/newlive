@@ -13,4 +13,12 @@ export const postusers = async (user) => {
 export const deleteuser = async ({ id }) => {
   return await users.delete(`/users/${id}`, id);
 };
+export const updateuser = async (id, data) => {
+  try {
+    return await users.patch(`/users/${id}`, { title: data });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default users;

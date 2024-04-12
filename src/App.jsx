@@ -20,6 +20,7 @@ import Updateuser from "./Updateuser";
 import Staecitycountry from "./Staecitycountry";
 import ReactReduscer from "./ReactReduscer";
 import Counterapp from "./Counterapp";
+import Edituser from "./Edituser";
 const App = () => {
   // const color = useSelector((state) => state.color.value);
   // console.log(color, "color");
@@ -28,6 +29,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<CalC />} />
         <Route path="/Counterapp" element={<Counterapp />} />
+        <Route path="/Edituser/:id" element={<Edituser />} />
         <Route path="/Todo" element={<Todo />} />
         <Route path="/Parent" element={<Parent />} />
         <Route path="/ReactReduscer" element={<ReactReduscer />} />

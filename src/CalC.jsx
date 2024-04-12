@@ -3,6 +3,9 @@ import { Input } from "sivasuryainput/src/componts/Input";
 import { useSelector } from "react-redux";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getusers, postusers, deleteuser } from "./usersapi";
+import { Link } from "react-router-dom";
+import { Suspense } from "react";
+import useHoc from "./Hoc";
 const initialState = {
   input1: "",
   input2: "",
@@ -50,6 +53,7 @@ const reducer = (state, action) => {
   }
 };
 function CalC() {
+  const [counts, increment] = useHoc(0);
   const {
     isLoading,
     isError,
@@ -85,15 +89,28 @@ function CalC() {
   useEffect(() => {
     setUser(users);
   }, [users]);
+  let randomnumber = Math.random() * 10;
   const handlesumit = (e) => {
     e.preventDefault();
     addquery.mutate({
       userId: 1,
-      id: Math.random() * 10,
+      id: String(randomnumber),
       title: value,
       completed: false,
     });
     setValue("");
+  };
+  let countries = [
+    { name: "india", cities: ["tamilnadu", "bangalore"] },
+    { name: "pak", cities: ["lagore"] },
+  ];
+  const [cities, setCities] = useState([]);
+  const getcity = (e) => {
+    console.log(e.target.value);
+    let country = e.target.value;
+    let finding = countries.find((data) => data.name === country);
+    console.log(finding, "finding");
+    setCities(finding.cities);
   };
   return (
     <>
@@ -125,12 +142,28 @@ function CalC() {
         />
         <button>adding</button>
       </form>
+      <select onChange={(e) => getcity(e)}>
+        {countries.map((data) => {
+          return <option>{data.name}</option>;
+        })}
+      </select>
+      <select>
+        {cities?.map((data) => {
+          return <option>{data}</option>;
+        })}
+      </select>
+      <Test props={"testing"} />
+      <button onClick={increment}>plus</button>
+      {counts}
       {addquery.isLoading
         ? "loading"
         : user?.map((data) => {
             return (
               <p>
                 {data.title}
+                <Link to={`/Edituser/${data.id}`}>
+                  <button>edit</button>
+                </Link>
                 <button onClick={() => deletemudation.mutate({ id: data.id })}>
                   delete
                 </button>
@@ -142,3 +175,10 @@ function CalC() {
 }
 
 export default CalC;
+export function Test({ props }) {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <p>{props}</p>
+    </Suspense>
+  );
+}
