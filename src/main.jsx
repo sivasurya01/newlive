@@ -10,12 +10,14 @@ import Outlets from "./features/Outlet.js";
 import Counter from "./features/Couter.js";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import reduxSlice from "./features/redux.js";
 const store = configureStore({
   reducer: {
     color: colorSlice,
     users: Userslice,
     outlets: Outlets,
     Counter: Counter,
+    redux: reduxSlice,
   },
 });
 const queryclient = new QueryClient();

@@ -47,3 +47,6 @@ let month = {
   4: "aprll",
 };
 console.log(month[3]);
+for (const key in month) {
+  console.log(key[0]);
+}

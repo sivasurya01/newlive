@@ -1,11 +1,13 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Input } from "sivasuryainput/src/componts/Input";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getusers, postusers, deleteuser } from "./usersapi";
 import { Link } from "react-router-dom";
 import { Suspense } from "react";
 import useHoc from "./Hoc";
+import { add } from "./features/redux";
+import Model from "./commponents/Model";
 const initialState = {
   input1: "",
   input2: "",
@@ -53,7 +55,10 @@ const reducer = (state, action) => {
   }
 };
 function CalC() {
+  const reduxdispatch = useDispatch();
   const [counts, increment] = useHoc(0);
+
+  const [model, setModel] = useState(true);
   const {
     isLoading,
     isError,
@@ -66,6 +71,13 @@ function CalC() {
   const [value, setValue] = useState("");
 
   const color = useSelector((state) => state.color.value); // Provide the selector
+
+  const redux = useSelector((state) => state.redux.value);
+  console.log(redux, "redux");
+  const incresereduxcount = (e) => {
+    e.preventDefault();
+    reduxdispatch(add());
+  };
   console.log(color.bgcolor, "color");
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state, "state");
@@ -114,6 +126,7 @@ function CalC() {
   };
   return (
     <>
+      {model && <Model close={() => setModel(false)} />}
       <div style={{ backgroundColor: color.bgcolor }}>
         {/* <Input type="number" className="border-2" /> */}
         {/* <button onClick={() => dispatch({ type: "addition" })}>Add</button> */}
@@ -133,6 +146,7 @@ function CalC() {
         <input name="updateInput2" onChange={handleChange} />
         <input value={state.count} readOnly />
       </div>
+      <button onClick={incresereduxcount}>redux{redux}</button>
       <form onSubmit={(e) => handlesumit(e)}>
         <input
           type="text"
