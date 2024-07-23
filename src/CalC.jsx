@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import useHoc from "./Hoc";
 import { add } from "./features/redux";
 import Model from "./commponents/Model";
+import useLocalStorage from "./custom-hooks/LocalStoragehook";
 const initialState = {
   input1: "",
   input2: "",
@@ -124,9 +125,18 @@ function CalC() {
     console.log(finding, "finding");
     setCities(finding.cities);
   };
+  const [name, setName] = useLocalStorage("name", "");
+  console.log(name, "name");
   return (
     <>
-      {model && <Model close={() => setModel(false)} />}
+      {model && (
+        <Model
+          close={() => {
+            setModel(false);
+          }}
+        />
+      )}
+      {name}
       <div style={{ backgroundColor: color.bgcolor }}>
         {/* <Input type="number" className="border-2" /> */}
         {/* <button onClick={() => dispatch({ type: "addition" })}>Add</button> */}
